@@ -153,10 +153,11 @@ int fct1(char *argv[], Liste * lst){
         if (!fichier) continue;//Si c'est pas un ficher on saute
 
         int taille = 0;
-        char * mot = malloc(sizeof(char)*50); //Bourrin faudra essayer de faire bien avec des realloc (ou pas)
+        char * mot = malloc(sizeof(char)*30); //Bourrin faudra essayer de faire bien avec des realloc (ou pas)
         int c = fgetc(fichier);
         while(c != EOF){
-            if ((c == '\n' || c=='\t' || c ==' ')){
+            //if ((c == '\n' || c=='\t' || c ==' ')){
+            if(!((c>64 && c<91)||(c>96 && c<123)||(c=='-'))){ //Si c n'est pas une lettre ni un tiret
                 //fin de mot
                 if (taille != 0){
                     mot[taille] = '\0';
@@ -165,6 +166,10 @@ int fct1(char *argv[], Liste * lst){
                 }
             //Ajout lettre au mot
             }else{
+                if(c>64 && c<91){
+                    c = c -'A' + 'a'; //Si majuscule passe en minuscule
+                }
+
                 mot[taille] = c;
                 taille++;
             }
