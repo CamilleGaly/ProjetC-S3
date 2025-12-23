@@ -21,6 +21,8 @@ typedef struct liste{
     int tailleMax; //Espace alloué
 } Liste;
 
+/////////Fonctions d'affichage ////////////
+
 void afficheLstChaine(ListeChaine lst){
     for(; lst != NULL; lst = lst->suivant){
         printf("%s : %d apparition(s)\n", lst->mot, lst->occurence);
@@ -33,23 +35,27 @@ void afficheLst(Liste lst){
     }
 }
 
+void afficheMemoire(InfoMem memoire){
+    printf("Utilisation de la memoire :\nTotal allocations : %d\nTotal desallocation : %d\nPic d'allocation : %d\n", memoire.cumul_alloc, memoire.cumul_desalloc, memoire.max_alloc);
+}
+
+
+
 //J'avais commencé par des lst chaînées jsp pk mais ça peut-être utile pour la version hash je pense
 //taille correspond à la taille du mot
-OccMotChaine * creerOccMotChaine(char * mot, int taille){
-    OccMotChaine * ptr = NULL;
-    ptr = malloc(sizeof(OccMotChaine));
+OccMotChaine * creerOccMotChaine(char * mot, int taille, InfoMem * memoire){
+    OccMotChaine * ptr = myMalloc(sizeof(OccMotChaine), memoire);
     if(!ptr){
-        free(ptr);
         return NULL; //erreur
     }
 
-    char * ptrMot = malloc(sizeof(char)*(taille+1));
-    ptrMot[taille] = '\0';
+    char * ptrMot = myMalloc(taille+1, memoire);
     if(!ptrMot){
-        free(ptrMot);
-        free(ptr);
+        myFree(ptrMot, memoire, taille+1);
+        myFree(ptr, memoire, sizeof(OccMotChaine));
         return NULL;
     }
+    ptrMot[taille] = '\0';
     ptr->mot = ptrMot;
     strcpy(ptr->mot, mot);
     ptr->occurence = 1;
@@ -60,14 +66,14 @@ OccMotChaine * creerOccMotChaine(char * mot, int taille){
     return ptr;
 }
 
-Liste * initLst(int taille){
-    Liste *lst = malloc(sizeof(Liste));
+Liste * initLst(int taille, InfoMem * memoire){
+    Liste *lst = myMalloc(sizeof(Liste), memoire);
     if (!lst) 
         return NULL;
 
-    lst->occmot = malloc(sizeof(OccMot)*taille); //Initialise avec une capacité de taille mots
+    lst->occmot = myMalloc(sizeof(OccMot)*taille, memoire); //Initialise avec une capacité de taille mots
     if(lst->occmot == NULL){
-        free(lst);
+        myFree(lst, memoire, sizeof(Liste));
         return NULL; //erreur
     }
     lst->tailleLst = 0;
@@ -75,21 +81,16 @@ Liste * initLst(int taille){
     return lst;
 }
 
-void freeListe(Liste *lst){
-    if(!lst)
-        return;
-
-    if(lst->occmot != NULL){
-        for (int i = 0; i < lst->tailleLst; i++){
-            free(lst->occmot[i].mot);
-        }
-        free(lst->occmot);
+void freeListe(Liste *lst, InfoMem * memoire){
+    for (int i = 0; i < lst->tailleLst; i++){
+        myFree(lst->occmot[i].mot, memoire, strlen(lst->occmot[i].mot)+1);//+1 pour le '\0' alloué aussi
     }
-    free(lst);
+    myFree(lst->occmot, memoire, sizeof(OccMot)*lst->tailleMax);
+    myFree(lst, memoire, sizeof(Liste));
 }
 
 //Ajoute un mot à la lst chainée ou augmente son nbr d'occurences si déjà présent
-void ajoutMotChaine(ListeChaine * lst, char * mot, int taille){
+void ajoutMotChaine(ListeChaine * lst, char * mot, int taille, InfoMem * memoire){
     for(; (*lst) != NULL ; lst = &(*lst)->suivant){
         if(strcmp((*lst)->mot, mot)==0){
             (*lst)->occurence ++;
@@ -97,14 +98,14 @@ void ajoutMotChaine(ListeChaine * lst, char * mot, int taille){
         }
     }
 
-    OccMotChaine * new = creerOccMotChaine(mot, taille);
+    OccMotChaine * new = creerOccMotChaine(mot, taille, memoire);
     *lst = new;
     return;
 }
 
 //Ajoute un mot au tableau ou augmente son nbr d'occurences si déjà présent
 //Plus tard on pourra ptet envisager une version avec un tableau trié et une recherche dichotomique
-void ajoutMotLst(Liste * lst, char * mot){
+void ajoutMotLst(Liste * lst, char * mot, InfoMem * memoire){
     for(int i = 0; i< lst->tailleLst ; i++){
         if(strcmp((lst->occmot)[i].mot, mot)==0){
             (lst->occmot)[i].occurence ++;
@@ -113,36 +114,36 @@ void ajoutMotLst(Liste * lst, char * mot){
     }
 
     if (lst->tailleLst == lst->tailleMax){
-        lst->occmot = realloc(lst->occmot, sizeof(OccMot)* lst->tailleMax * 2); //Agrandis la taille en doublant
+        lst->occmot = myRealloc(lst->occmot, sizeof(OccMot)*lst->tailleMax * 2, memoire, sizeof(OccMot)* lst->tailleMax); //Agrandis la taille en doublant
         lst->tailleMax = lst->tailleMax * 2;
     }
     
-    lst->occmot[lst->tailleLst].mot = strdup(mot);
+    lst->occmot[lst->tailleLst].mot = myStrdup(mot, memoire);
     lst->occmot[lst->tailleLst].occurence = 1;
     lst->tailleLst ++;
 
     return;
 }
 
-void fusionLst(Liste * lst, Liste *a, Liste *b){
+void fusionLst(Liste * lst, Liste *a, Liste *b, InfoMem * memoire){
     int pt_a = 0, pt_b = 0;
 
     for(int i = 0; i < lst->tailleLst; i++){
-        free(lst->occmot[i].mot);
+        myFree(lst->occmot[i].mot, memoire, strlen(lst->occmot[i].mot) + 1);
         if(pt_a == a->tailleLst){
-            lst->occmot[i].mot = strdup(b->occmot[pt_b].mot);
+            lst->occmot[i].mot = myStrdup(b->occmot[pt_b].mot, memoire);
             lst->occmot[i].occurence = b->occmot[pt_b].occurence;
             pt_b ++;
         }else if(pt_b == b->tailleLst){
-            lst->occmot[i].mot = strdup(a->occmot[pt_a].mot);
+            lst->occmot[i].mot = myStrdup(a->occmot[pt_a].mot, memoire);
             lst->occmot[i].occurence = a->occmot[pt_a].occurence;
             pt_a ++;
         }else if(a->occmot[pt_a].occurence > b->occmot[pt_b].occurence){
-            lst->occmot[i].mot = strdup(a->occmot[pt_a].mot);
+            lst->occmot[i].mot = myStrdup(a->occmot[pt_a].mot, memoire);
             lst->occmot[i].occurence = a->occmot[pt_a].occurence;
             pt_a ++;
         }else{
-            lst->occmot[i].mot = strdup(b->occmot[pt_b].mot);
+            lst->occmot[i].mot = myStrdup(b->occmot[pt_b].mot, memoire);
             lst->occmot[i].occurence = b->occmot[pt_b].occurence;
             pt_b ++;
         }
@@ -150,38 +151,38 @@ void fusionLst(Liste * lst, Liste *a, Liste *b){
 }
 
 //Tri une liste en fonction du nombre d'occurence de chaque mot (pour la visualisation finale)
-void triFusionOccurence(Liste * lst){
+void triFusionOccurence(Liste * lst, InfoMem * memoire){
     if(lst->tailleLst == 0 || lst->tailleLst == 1){
         return;
     }
 
     //Sépare en 2
     int taille_a = lst->tailleLst / 2;
-    Liste *a = initLst(taille_a);
+    Liste *a = initLst(taille_a, memoire);
     for (int i = 0; i < taille_a; i++) {
-        a->occmot[i].mot = strdup(lst->occmot[i].mot);
+        a->occmot[i].mot = myStrdup(lst->occmot[i].mot, memoire);
         a->occmot[i].occurence = lst->occmot[i].occurence;
     }
     a->tailleLst = taille_a;
 
     int taille_b = lst->tailleLst - lst->tailleLst / 2;
-    Liste * b = initLst(taille_b);
+    Liste * b = initLst(taille_b, memoire);
     for (int i = 0; i < taille_b; i++) {
-        b->occmot[i].mot = strdup(lst->occmot[taille_a + i].mot);
+        b->occmot[i].mot = myStrdup(lst->occmot[taille_a + i].mot, memoire);
         b->occmot[i].occurence = lst->occmot[taille_a + i].occurence;
     }
     b->tailleLst = b->tailleMax;
 
-    triFusionOccurence(a);
-    triFusionOccurence(b);
+    triFusionOccurence(a, memoire);
+    triFusionOccurence(b, memoire);
 
-    fusionLst(lst,a,b); //Détruit a et b et remplit lst de façon triée
-    freeListe(a);
-    freeListe(b);
+    fusionLst(lst,a,b, memoire); //Détruit a et b et remplit lst de façon triée
+    freeListe(a, memoire);
+    freeListe(b, memoire);
 }
 
 //Version test avec la structure chaînée
-int fct0(char *argv[], ListeChaine * lst){
+int fct0(char *argv[], ListeChaine * lst, InfoMem * memoire){
 
     //Fais tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
@@ -189,7 +190,7 @@ int fct0(char *argv[], ListeChaine * lst){
         if (!fichier) continue;//Si c'est pas un ficher on saute
 
         int taille = 0;
-        char * mot = malloc(sizeof(char)*50); //Bourrin faudra essayer de faire bien avec des realloc (ou pas)
+        char * mot = myMalloc(50, memoire); //Bourrin faudra essayer de faire bien avec des realloc (ou pas)
         int c = fgetc(fichier);
         while(c != EOF){
             if ((c == '\n' || c=='\t' || c ==' ')){
@@ -197,7 +198,7 @@ int fct0(char *argv[], ListeChaine * lst){
                 if (taille != 0){
                     //printf("Ajout mot");
                     mot[taille] = '\0';
-                    ajoutMotChaine(lst, mot, taille);
+                    ajoutMotChaine(lst, mot, taille, memoire);
                     taille = 0;   
                 }
             //Ajout lettre au mot
@@ -212,14 +213,14 @@ int fct0(char *argv[], ListeChaine * lst){
         //gestion du dernier mot
         if (taille != 0){
             mot[taille] = '\0';
-            ajoutMotChaine(lst, mot, taille);
+            ajoutMotChaine(lst, mot, taille, memoire);
         }
         fclose(fichier);
     }
     return 1;
 }
 
-int listeSimple(char *argv[], Liste * lst){
+int listeSimple(char *argv[], Liste * lst, InfoMem * memoire){
 
     //Fais tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
@@ -227,7 +228,7 @@ int listeSimple(char *argv[], Liste * lst){
         if (!fichier) continue;//Si c'est pas un ficher on saute
 
         int taille = 0;
-        char * mot = malloc(sizeof(char)*30); //Bourrin faudra essayer de faire bien avec des realloc (ou pas)
+        char * mot = myMalloc(sizeof(char)*30, memoire); //Plus grand mot français a moins de 30 lettres
         int c = fgetc(fichier);
         while(c != EOF){
 
@@ -235,7 +236,7 @@ int listeSimple(char *argv[], Liste * lst){
                 //fin de mot
                 if (taille != 0){
                     mot[taille] = '\0';
-                    ajoutMotLst(lst, mot);
+                    ajoutMotLst(lst, mot, memoire);
                     taille = 0;   
                 }
             //Ajout lettre au mot
@@ -254,7 +255,7 @@ int listeSimple(char *argv[], Liste * lst){
         //gestion du dernier mot
         if (taille != 0){
             mot[taille] = '\0';
-            ajoutMotLst(lst, mot);
+            ajoutMotLst(lst, mot, memoire);
         }
         fclose(fichier);
     }
@@ -275,26 +276,25 @@ void ecrireOcc(Liste lst){
 
 
 int main(int argc, char *argv[]){
-    /*
-    //Version de test pour les lst chaînées
-    ListeChaine lst0 = NULL;
-    fct0(argv, &lst0);
-    printf("\nListe 0 : \n");
-    afficheLstChaine(lst0);
-    */
+    InfoMem * memoire = initInfoMem();
+    if(!memoire){
+        printf("Erreur d'allocation");
+        return 1;
+    }
 
     //Version avec tableau dynamique (pas trié)
-    Liste * lst1 = initLst(10);
+    Liste * lst1 = initLst(10, memoire);
     if(!lst1){
         printf("Erreur d'allocation");
         return 1;
     }
-    listeSimple(argv, lst1);
+    listeSimple(argv, lst1, memoire);
     printf("\nListe 1 : \n");
     afficheLst(*lst1);
 
-    triFusionOccurence(lst1);
+    triFusionOccurence(lst1, memoire);
     ecrireOcc(*lst1);
+    afficheMemoire(*memoire);
 
    return 0;
 }
