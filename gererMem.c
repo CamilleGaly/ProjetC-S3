@@ -29,7 +29,14 @@ void* myRealloc(void* ptr, size_t new_size, InfoMem* infoMem, size_t old_size){
     if(newPtr == NULL)
         return NULL; //echec allocation
     
-    infoMem->cumul_alloc += new_size - old_size; //aggrandissement de la zone memoire
+    if(new_size < old_size){//diminution zone mémoire
+        infoMem->cumul_desalloc += old_size - new_size;
+    }else if(newPtr == ptr){ //aggrandissement de la zone memoire
+        infoMem->cumul_alloc += new_size - old_size;
+    }else{ //déplacement
+        infoMem->cumul_alloc += new_size; 
+        infoMem->cumul_desalloc += old_size;
+    }
 
     //Gestion du pic d'allocation
     if(infoMem->cumul_alloc - infoMem->cumul_desalloc > infoMem->max_alloc){
