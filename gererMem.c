@@ -4,6 +4,7 @@
 typedef struct {
     size_t cumul_alloc; //cumul de l’espace mémoire alloué
     size_t cumul_desalloc; //cumul de l’espace mémoire désalloué
+    size_t max_alloc; //pic d'allocation mémoire
 } InfoMem;
 
 void* myMalloc(size_t size, InfoMem* infoMem){
@@ -13,6 +14,11 @@ void* myMalloc(size_t size, InfoMem* infoMem){
         return NULL; //echec de l'allocation
     
     infoMem->cumul_alloc += size;
+
+    //Gestion du pic d'allocation
+    if(infoMem->cumul_alloc - infoMem->cumul_desalloc > infoMem->max_alloc){
+        infoMem->max_alloc = infoMem->cumul_alloc - infoMem->cumul_desalloc;
+    }
     return pt;
 }
 
@@ -24,6 +30,11 @@ void* myRealloc(void* ptr, size_t new_size, InfoMem* infoMem, size_t old_size){
         return NULL; //echec allocation
     
     infoMem->cumul_alloc += new_size - old_size; //aggrandissement de la zone memoire
+
+    //Gestion du pic d'allocation
+    if(infoMem->cumul_alloc - infoMem->cumul_desalloc > infoMem->max_alloc){
+        infoMem->max_alloc = infoMem->cumul_alloc - infoMem->cumul_desalloc;
+    }
     return newPtr;
 }
 

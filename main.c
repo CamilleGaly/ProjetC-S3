@@ -19,7 +19,7 @@ typedef struct liste{
     OccMot * occmot;
     int tailleLst; //Espace occupé
     int tailleMax; //Espace alloué
-} Liste; 
+} Liste;
 
 void afficheLstChaine(ListeChaine lst){
     for(; lst != NULL; lst = lst->suivant){
@@ -60,13 +60,32 @@ OccMotChaine * creerOccMotChaine(char * mot, int taille){
     return ptr;
 }
 
-int initLst(Liste * lst){
-    lst->occmot = malloc(sizeof(OccMot)*10); //Initialise avec une capacité de 10 mots
-    if(lst->occmot == NULL)
-        return 0; //erreur
+Liste * initLst(int taille){
+    Liste *lst = malloc(sizeof(Liste));
+    if (!lst) 
+        return NULL;
+
+    lst->occmot = malloc(sizeof(OccMot)*taille); //Initialise avec une capacité de taille mots
+    if(lst->occmot == NULL){
+        free(lst);
+        return NULL; //erreur
+    }
     lst->tailleLst = 0;
-    lst->tailleMax = 10;
-    return 1;
+    lst->tailleMax = taille;
+    return lst;
+}
+
+void freeListe(Liste *lst){
+    if(!lst)
+        return;
+
+    if(lst->occmot != NULL){
+        for (int i = 0; i < lst->tailleLst; i++){
+            free(lst->occmot[i].mot);
+        }
+        free(lst->occmot);
+    }
+    free(lst);
 }
 
 //Ajoute un mot à la lst chainée ou augmente son nbr d'occurences si déjà présent
@@ -105,6 +124,61 @@ void ajoutMotLst(Liste * lst, char * mot){
     return;
 }
 
+void fusionLst(Liste * lst, Liste *a, Liste *b){
+    int pt_a = 0, pt_b = 0;
+
+    for(int i = 0; i < lst->tailleLst; i++){
+        free(lst->occmot[i].mot);
+        if(pt_a == a->tailleLst){
+            lst->occmot[i].mot = strdup(b->occmot[pt_b].mot);
+            lst->occmot[i].occurence = b->occmot[pt_b].occurence;
+            pt_b ++;
+        }else if(pt_b == b->tailleLst){
+            lst->occmot[i].mot = strdup(a->occmot[pt_a].mot);
+            lst->occmot[i].occurence = a->occmot[pt_a].occurence;
+            pt_a ++;
+        }else if(a->occmot[pt_a].occurence > b->occmot[pt_b].occurence){
+            lst->occmot[i].mot = strdup(a->occmot[pt_a].mot);
+            lst->occmot[i].occurence = a->occmot[pt_a].occurence;
+            pt_a ++;
+        }else{
+            lst->occmot[i].mot = strdup(b->occmot[pt_b].mot);
+            lst->occmot[i].occurence = b->occmot[pt_b].occurence;
+            pt_b ++;
+        }
+    }
+}
+
+//Tri une liste en fonction du nombre d'occurence de chaque mot (pour la visualisation finale)
+void triFusionOccurence(Liste * lst){
+    if(lst->tailleLst == 0 || lst->tailleLst == 1){
+        return;
+    }
+
+    //Sépare en 2
+    int taille_a = lst->tailleLst / 2;
+    Liste *a = initLst(taille_a);
+    for (int i = 0; i < taille_a; i++) {
+        a->occmot[i].mot = strdup(lst->occmot[i].mot);
+        a->occmot[i].occurence = lst->occmot[i].occurence;
+    }
+    a->tailleLst = taille_a;
+
+    int taille_b = lst->tailleLst - lst->tailleLst / 2;
+    Liste * b = initLst(taille_b);
+    for (int i = 0; i < taille_b; i++) {
+        b->occmot[i].mot = strdup(lst->occmot[taille_a + i].mot);
+        b->occmot[i].occurence = lst->occmot[taille_a + i].occurence;
+    }
+    b->tailleLst = b->tailleMax;
+
+    triFusionOccurence(a);
+    triFusionOccurence(b);
+
+    fusionLst(lst,a,b); //Détruit a et b et remplit lst de façon triée
+    freeListe(a);
+    freeListe(b);
+}
 
 //Version test avec la structure chaînée
 int fct0(char *argv[], ListeChaine * lst){
@@ -188,21 +262,25 @@ int fct1(char *argv[], Liste * lst){
 }
 
 int main(int argc, char *argv[]){
+    /*
     //Version de test pour les lst chaînées
     ListeChaine lst0 = NULL;
     fct0(argv, &lst0);
     printf("\nListe 0 : \n");
     afficheLstChaine(lst0);
+    */
 
     //Version avec tableau dynamique (pas trié)
-    Liste lst1;
-    if(!initLst(&lst1)){
+    Liste * lst1 = initLst(10);
+    if(!lst1){
         printf("Erreur d'allocation");
         return 1;
     }
-    fct1(argv, &lst1);
+    fct1(argv, lst1);
     printf("\nListe 1 : \n");
-    afficheLst(lst1);
+    afficheLst(*lst1);
+
+    triFusionOccurence(lst1);
 
    return 0;
 }
