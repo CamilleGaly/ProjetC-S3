@@ -219,7 +219,7 @@ int fct0(char *argv[], ListeChaine * lst){
     return 1;
 }
 
-int fct1(char *argv[], Liste * lst){
+int listeSimple(char *argv[], Liste * lst){
 
     //Fais tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
@@ -230,8 +230,8 @@ int fct1(char *argv[], Liste * lst){
         char * mot = malloc(sizeof(char)*30); //Bourrin faudra essayer de faire bien avec des realloc (ou pas)
         int c = fgetc(fichier);
         while(c != EOF){
-            //if ((c == '\n' || c=='\t' || c ==' ')){
-            if(!((c>64 && c<91)||(c>96 && c<123)||(c=='-'))){ //Si c n'est pas une lettre ni un tiret
+
+            if(!((c>64 && c<91)||(c>96 && c<123))){ //Si c n'est pas une lettre classique
                 //fin de mot
                 if (taille != 0){
                     mot[taille] = '\0';
@@ -240,7 +240,7 @@ int fct1(char *argv[], Liste * lst){
                 }
             //Ajout lettre au mot
             }else{
-                if(c>64 && c<91){
+                if((c>64 && c<91)){
                     c = c -'A' + 'a'; //Si majuscule passe en minuscule
                 }
 
@@ -261,6 +261,19 @@ int fct1(char *argv[], Liste * lst){
     return 1;
 }
 
+
+/////////////// Ecriture des resultats dans un fichier ////////////////////
+
+void ecrireOcc(Liste lst){
+    FILE* fichier = fopen("resultatOcc.txt", "w");
+    for(int i = 0; i < lst.tailleLst; i++){
+        fprintf(fichier, "%s %d \n", lst.occmot[i].mot, lst.occmot[i].occurence);
+    }
+    fclose(fichier);
+}
+
+
+
 int main(int argc, char *argv[]){
     /*
     //Version de test pour les lst chaînées
@@ -276,11 +289,12 @@ int main(int argc, char *argv[]){
         printf("Erreur d'allocation");
         return 1;
     }
-    fct1(argv, lst1);
+    listeSimple(argv, lst1);
     printf("\nListe 1 : \n");
     afficheLst(*lst1);
 
     triFusionOccurence(lst1);
+    ecrireOcc(*lst1);
 
    return 0;
 }

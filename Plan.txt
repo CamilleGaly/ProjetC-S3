@@ -6,4 +6,4 @@ Mes idées pour l'instant (un peu tjrs la même chose):
 2) Méthode un chouilla mieux mais quasi pareil : tableau de CptMot mais trié par ordre alphabétique (pour le coup chaînée c'est pas mal pour insérer des trucs)
 3) Méthode ptet smart : Utiliser une table de hachage pour stocker les CptMot
 
-Jsp si t'as mieux faudra que tu regarde
+Jsp si t'as mieux faudra que tu regardes
