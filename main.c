@@ -36,7 +36,7 @@ void afficheLst(Liste lst){
 }
 
 void afficheMemoire(InfoMem memoire){
-    printf("Utilisation de la memoire :\nTotal allocations : %d\nTotal desallocation : %d\nPic d'allocation : %d\n", memoire.cumul_alloc, memoire.cumul_desalloc, memoire.max_alloc);
+    printf("\nUtilisation de la memoire :\nTotal allocations : %ld\nTotal desallocation : %ld\nPic d'allocation : %ld\n", memoire.cumul_alloc, memoire.cumul_desalloc, memoire.max_alloc);
 }
 
 
@@ -232,7 +232,10 @@ int listeSimple(char *argv[], Liste * lst, InfoMem * memoire){
         int c = fgetc(fichier);
         while(c != EOF){
 
-            if(!((c>64 && c<91)||(c>96 && c<123))){ //Si c n'est pas une lettre classique
+            if(!((c>='a' && c<='z') || (c>='A' && c<='Z') || (c == '-'))){ //Si c n'est pas une lettre classique
+                if(taille >= 30){
+                    taille = 0; //Ce n'est pas un mot on en prend pas compte
+                }
                 //fin de mot
                 if (taille != 0){
                     mot[taille] = '\0';
@@ -241,15 +244,15 @@ int listeSimple(char *argv[], Liste * lst, InfoMem * memoire){
                 }
             //Ajout lettre au mot
             }else{
-                if((c>64 && c<91)){
-                    c = c -'A' + 'a'; //Si majuscule passe en minuscule
+                if((c>='A' && c<='Z')){
+                    c = c -'A' + 'a';
                 }
-
-                mot[taille] = c;
+                if(taille < 29)
+                    mot[taille] = c; //Ajout que si on est dans la zone de 30 allouée
                 taille++;
             }
 
-            printf("%c", c);
+            //printf("%c", c);
             c = fgetc(fichier);
         }
         //gestion du dernier mot
@@ -290,7 +293,7 @@ int main(int argc, char *argv[]){
     }
     listeSimple(argv, lst1, memoire);
     printf("\nListe 1 : \n");
-    afficheLst(*lst1);
+    //afficheLst(*lst1);
 
     triFusionOccurence(lst1, memoire);
     ecrireOcc(*lst1);
