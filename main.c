@@ -1,3 +1,4 @@
+#include<time.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -443,6 +444,7 @@ int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire){
 
 
 int main(int argc, char *argv[]){
+    time_t debut = time(NULL);
     InfoMem * memoire = initInfoMem();
     if(!memoire){
         printf("Erreur d'allocation");
@@ -460,9 +462,15 @@ int main(int argc, char *argv[]){
     //afficheLst(*lst1);
 
     triFusionOccurence(lst1, memoire);
+
+    time_t fin = time( NULL);
+    unsigned long duree = (unsigned long) difftime(fin, debut);
+
     ecrireOcc(*lst1);
     afficheMemoire(*memoire);
+    printf("Temps ecoule : %ld secondes\n", duree);  
 */
+
     //Version table de hachage
     Table_h * table = initTableHach(30, memoire);
     if(!table){
@@ -470,14 +478,16 @@ int main(int argc, char *argv[]){
         return 1;
     }
     fonctionHachage(argv, table, memoire);
-    printf("\nResultat table Hachage : \n");
-    afficheTableHach(*table);
 
     Liste * resultat = tableHach_to_lst(table, memoire);
-    printf("\nListe : \n");
-    afficheLst(*resultat);
     triFusionOccurence(resultat, memoire);
+    time_t fin = time( NULL);
+    unsigned long duree = (unsigned long) difftime(fin, debut);
+
     ecrireOcc(*resultat);
     afficheMemoire(*memoire);
+    printf("Temps ecoule : %ld secondes\n", duree);  
+
+
     return 0;
 }
