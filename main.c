@@ -293,12 +293,15 @@ void ajoutTableHach(Table_h * table, char * mot, InfoMem * memoire){
 Liste * tableHach_to_lst(Table_h * table, InfoMem * memoire){
     Liste * lst = initLst(table->occupation, memoire);
     int i = 0;
-    for(int j = 0; i < table->capacite; j++){
+    for(int j = 0; j < table->capacite; j++){
         if(table->occmot[j] != NULL){
             lst->occmot[i].mot = myStrdup(table->occmot[j]->mot, memoire);
             lst->occmot[i].occurence = table->occmot[j]->occurence;
+            i++;
         }
     }
+    lst->tailleMax = table->occupation;
+    lst->tailleLst = table->occupation;
     return lst;
 }
 
@@ -460,6 +463,7 @@ int main(int argc, char *argv[]){
     ecrireOcc(*lst1);
     afficheMemoire(*memoire);
 */
+    //Version table de hachage
     Table_h * table = initTableHach(30, memoire);
     if(!table){
         printf("Erreur d'allocation");
@@ -470,6 +474,8 @@ int main(int argc, char *argv[]){
     afficheTableHach(*table);
 
     Liste * resultat = tableHach_to_lst(table, memoire);
+    printf("\nListe : \n");
+    afficheLst(*resultat);
     triFusionOccurence(resultat, memoire);
     ecrireOcc(*resultat);
     afficheMemoire(*memoire);
