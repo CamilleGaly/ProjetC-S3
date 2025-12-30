@@ -213,6 +213,39 @@ void triFusionOccurence(Liste * lst, InfoMem * memoire){
     freeListe(b, memoire);
 }
 
+/////////// Liste triée par ordre alphabétique ///////////
+
+void ajoutMotTriee(Liste *lst, char *mot, InfoMem *memoire){
+    // Recherche dichotomique
+    int gauche = 0, droite = lst->tailleLst - 1;
+    int milieu;
+    while(gauche <= droite){
+        milieu = (gauche + droite) / 2;
+        int cmp = strcmp(lst->occmot[milieu].mot, mot);
+        if(cmp == 0){
+            lst->occmot[milieu].occurrence ++;
+            return;
+        }
+        else if(cmp < 0){
+            gauche = milieu + 1;
+        }
+        else{
+            droite = milieu - 1;
+        }
+    }
+    // Insertion du mot à gauche
+    if(lst->tailleLst == lst->tailleMax){
+        lst->occmot = myRealloc(lst->occmot, sizeof(OccMot)*lst->tailleMax * 2, memoire, sizeof(OccMot)* lst->tailleLst); //Agrandit la taille en doublant
+        lst->tailleMax = lst->tailleMax * 2;
+    }
+    for(int i = lst->tailleLst; i > gauche; i--){
+        lst->occmot[i] = lst->occmot[i-1];
+    }
+    lst->occmot[gauche].mot = myStrdup(mot, memoire);
+    lst->occmot[gauche].occurrence = 1;
+    lst->tailleLst ++;
+    return;
+}
 
 //////////////////// Table de hachage ////////////////////
 
@@ -469,6 +502,26 @@ int main(int argc, char *argv[]){
     ecrireOcc(*lst1);
     afficheMemoire(*memoire);
     printf("Temps ecoule : %ld secondes\n", duree);  
+*/
+
+/*
+    //Version liste triée par ordre alphabétique
+    Liste * lst2 = initLst(10, memoire);
+    if(!lst2){
+        printf("Erreur d'allocation");
+        return 1;
+    }
+    listeTriee(argv, lst2, memoire);
+    printf("\nListe 2 : \n");
+    //afficheLst(*lst2);
+
+    triFusionOccurrence(lst2, memoire);
+
+    time_t fin = time( NULL);
+    unsigned long duree = (unsigned long) difftime(fin, debut);
+    ecrireOcc(*lst2);
+    afficheMemoire(*memoire);
+    printf("Temps ecoule : %ld secondes\n", duree);
 */
 
     //Version table de hachage
