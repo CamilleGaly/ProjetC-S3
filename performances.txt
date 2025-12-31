@@ -1,0 +1,6 @@
+Total de l'utilisation de la memoire :
+Allocations : 902
+Desallocation : 750
+Pic : 448
+
+Temps : 2 millisecondes

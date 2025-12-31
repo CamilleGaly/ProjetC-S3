@@ -10,4 +10,4 @@ MAJuscules
 
 mais pas d'accent 
 sinon tout explose 
-ok jéméléaccent
+ok

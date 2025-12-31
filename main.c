@@ -407,7 +407,7 @@ int fct0(char *argv[], ListeChaine * lst, InfoMem * memoire){
     return 1;
 }
 
-int listeSimple(char *argv[], Liste * lst, InfoMem * memoire){
+int listeSimple(char *argv[], Liste * lst, InfoMem * memoire, int k){
 
     //Fais tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
@@ -423,7 +423,11 @@ int listeSimple(char *argv[], Liste * lst, InfoMem * memoire){
                 if(taille >= 30){
                     taille = 0; //Ce n'est pas un mot on en prend pas compte
                 }
-                //fin de mot
+                else if(taille < k){
+                    taille = 0; //Le mot ne fait pas au moins k lettres
+                }
+
+                //fin de mot valide
                 if (taille != 0){
                     mot[taille] = '\0';
                     ajoutMotLst(lst, mot, memoire);
@@ -443,7 +447,7 @@ int listeSimple(char *argv[], Liste * lst, InfoMem * memoire){
             c = fgetc(fichier);
         }
         //gestion du dernier mot
-        if (taille != 0){
+        if(taille != 0 && taille >= 30 && taille < k){
             mot[taille] = '\0';
             ajoutMotLst(lst, mot, memoire);
         }
@@ -452,7 +456,7 @@ int listeSimple(char *argv[], Liste * lst, InfoMem * memoire){
     return 1;
 }
 
-int listeTriee(char *argv[], Liste * lst, InfoMem * memoire){
+int listeTriee(char *argv[], Liste * lst, InfoMem * memoire, int k){
     // Fait tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
         FILE *fichier = fopen(argv[i], "r");
@@ -464,8 +468,11 @@ int listeTriee(char *argv[], Liste * lst, InfoMem * memoire){
             if(!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == '-'))){ // Si c n'est pas une lettre classique
                 if(taille >= 30){
                     taille = 0; // Ce n'est pas un mot on en prend pas compte
+                }else if(taille < k){
+                    taille = 0; //Le mot ne fait pas au moins k lettres
                 }
-                // fin de mot
+
+                //fin de mot valide
                 if(taille != 0){
                     mot[taille] = '\0';
                     ajoutMotTriee(lst, mot, memoire);
@@ -485,7 +492,7 @@ int listeTriee(char *argv[], Liste * lst, InfoMem * memoire){
             c = fgetc(fichier);
         }
         // gestion du dernier mot 
-        if(taille != 0){
+        if(taille != 0 && taille >= 30 && taille < k){
             mot[taille] = '\0';
             ajoutMotTriee(lst, mot, memoire);
         }
@@ -497,7 +504,7 @@ int listeTriee(char *argv[], Liste * lst, InfoMem * memoire){
 
 
 
-int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire){
+int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire, int k){
     //Fais tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
         FILE* fichier = fopen(argv[i], "r");
@@ -511,8 +518,11 @@ int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire){
             if(!((c>='a' && c<='z') || (c>='A' && c<='Z') || (c == '-'))){ //Si c n'est pas une lettre classique
                 if(taille >= 30){
                     taille = 0; //Ce n'est pas un mot on en prend pas compte
+                }else if(taille < k){
+                    taille = 0; //Le mot ne fait pas au moins k lettres
                 }
-                //fin de mot
+
+                //fin de mot valide
                 if (taille != 0){
                     mot[taille] = '\0';
                     ajoutTableHach(table, mot, memoire);
@@ -532,7 +542,7 @@ int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire){
             c = fgetc(fichier);
         }
         //gestion du dernier mot
-        if (taille != 0){
+        if(taille != 0 && taille >= 30 && taille < k){
             mot[taille] = '\0';
             ajoutTableHach(table, mot, memoire);
         }
@@ -547,11 +557,12 @@ int main(int argc, char *argv[]){
     //Cas du help
     if(argv[1] && strcmp("-help", argv[1])==0){
             printf("Usage : Etudier le nombre d'occurrences de chaque mot d'un texte.\n");
-            printf("Lancement : ./main [-help] [-p] [-n int] [-a simple|tri|hach] [-s fichierdesortie] [-l fichierdeperf] fichiers de données\n");
+            printf("Lancement : ./main [-help] [-p] [-n int] [-k int] [-a simple|tri|hach] [-s fichierdesortie] [-l fichierdeperf] fichiers de données\n");
             printf("Options :\n");
             printf("-help Affiche ce message d'aide à l'utilisation.\n");
             printf("-p Affiche le résultat dans le terminal.\n");
             printf("-n Permet de n'afficher que les n mots les plus présents dans le texte.\n");
+            printf("-k Permet de ne prendre en compte que les mots d'au moins k lettres.\n");
             printf("-a Choix de l'algorithme utilisé : simple (liste classique), tri (liste triée) et hash (table de hachage, l'option par defaut).\n");
             printf("-s Afin de sauvegarder le résultat dans un fichier texte.\n");
             printf("-l Afin de sauvegarder les performances dans un fichier texte.\n");
@@ -560,6 +571,7 @@ int main(int argc, char *argv[]){
     }
     int algo = 3; // 1 = simple, 2 = tri, 3 = hach (algorithme par défaut)
     int n = 0; //Nombre de mots à afficher, par défaut on affiche rien, vaut -1 pour tout afficher
+    int k = 0; //Par defaut prend tous les mots en compte
     for(int i = 0; argv[i]; i++){
         if(argv[i][0]=='-' && argv[i][1]=='a'){
             if(strcmp("simple", argv[i+1]) == 0)
@@ -567,10 +579,13 @@ int main(int argc, char *argv[]){
             if(strcmp("tri", argv[i+1]) == 0)
                 algo = 2;
         }
-        if(argv[i][0]=='-' && argv[i][1]=='n')
-            n = argv[i+1];
-        if(argv[i][0]=='-' && argv[i][1]=='p' && n ==0) //Verifie qu'on n'affiche pas déjà n nombres dans le terminal
+        if(argv[i][0]=='-' && argv[i][1]=='n'){
+            n = atoi(argv[i+1]); //passe d'une chaîne de caractères à un entier
+        }
+        else if(argv[i][0]=='-' && argv[i][1]=='p' && n ==0) //Verifie qu'on n'affiche pas déjà n nombres dans le terminal
             n = -1; //Affiche tout
+        else if(argv[i][0]=='-' && argv[i][1]=='k')
+            k = atoi(argv[i+1]);
     }    
 
     clock_t debut = clock();
@@ -589,7 +604,7 @@ int main(int argc, char *argv[]){
             printf("Erreur d'allocation");
             return 1;
         }
-        listeSimple(argv, lst, memoire);
+        listeSimple(argv, lst, memoire, k);
         triFusionOccurrence(lst, memoire);
 
         clock_t fin = clock();
@@ -597,6 +612,7 @@ int main(int argc, char *argv[]){
 
         ecrireOcc(argv,*lst);
         ecrirePerf(argv, *memoire, duree_milli);
+        afficheLst(*lst,n);
         afficheMemoire(*memoire);
         printf("Temps ecoule : %ld millisecondes\n", duree_milli); 
     }
@@ -608,13 +624,14 @@ int main(int argc, char *argv[]){
             printf("Erreur d'allocation");
             return 1;
         }
-        listeTriee(argv, lst, memoire);
+        listeTriee(argv, lst, memoire, k);
         triFusionOccurrence(lst, memoire);
 
         clock_t fin = clock();
         unsigned long duree_milli = (fin -  debut) * 1000 / CLOCKS_PER_SEC;
         ecrireOcc(argv,*lst);
         ecrirePerf(argv, *memoire, duree_milli);
+        afficheLst(*lst,n);
         afficheMemoire(*memoire);
         printf("Temps ecoule : %ld millisecondes\n", duree_milli);  
     }
@@ -626,7 +643,7 @@ int main(int argc, char *argv[]){
             printf("Erreur d'allocation");
             return 1;
         }
-        fonctionHachage(argv, table, memoire);
+        fonctionHachage(argv, table, memoire, k);
 
         Liste * resultat = tableHach_to_lst(table, memoire);
         triFusionOccurrence(resultat, memoire);
@@ -636,6 +653,7 @@ int main(int argc, char *argv[]){
 
         ecrireOcc(argv,*resultat);
         ecrirePerf(argv, *memoire, duree_milli);
+        afficheLst(*resultat, n);
         afficheMemoire(*memoire);
         printf("Temps ecoule : %ld millisecondes\n", duree_milli);
     }
