@@ -477,7 +477,8 @@ int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire){
 
 
 int main(int argc, char *argv[]){
-    time_t debut = time(NULL);
+
+    clock_t debut = clock();
     InfoMem * memoire = initInfoMem();
     if(!memoire){
         printf("Erreur d'allocation");
@@ -496,15 +497,15 @@ int main(int argc, char *argv[]){
 
     triFusionOccurrence(lst1, memoire);
 
-    time_t fin = time( NULL);
-    unsigned long duree = (unsigned long) difftime(fin, debut);
+    clock_t fin = clock();
+    unsigned long duree_milli = (fin -  debut) * 1000 / CLOCKS_PER_SEC;
 
     ecrireOcc(*lst1);
     afficheMemoire(*memoire);
-    printf("Temps ecoule : %ld secondes\n", duree);  
+    printf("Temps ecoule : %ld millisecondes\n", duree_milli);  
 */
 
-/*
+
     //Version liste triée par ordre alphabétique
     Liste * lst2 = initLst(10, memoire);
     if(!lst2){
@@ -517,13 +518,13 @@ int main(int argc, char *argv[]){
 
     triFusionOccurrence(lst2, memoire);
 
-    time_t fin = time( NULL);
-    unsigned long duree = (unsigned long) difftime(fin, debut);
+    clock_t fin = clock();
+    unsigned long duree_milli = (fin -  debut) * 1000 / CLOCKS_PER_SEC;
     ecrireOcc(*lst2);
     afficheMemoire(*memoire);
-    printf("Temps ecoule : %ld secondes\n", duree);
-*/
+    printf("Temps ecoule : %ld millisecondes\n", duree_milli);  
 
+/*
     //Version table de hachage
     Table_h * table = initTableHach(30, memoire);
     if(!table){
@@ -534,13 +535,13 @@ int main(int argc, char *argv[]){
 
     Liste * resultat = tableHach_to_lst(table, memoire);
     triFusionOccurrence(resultat, memoire);
-    time_t fin = time( NULL);
-    unsigned long duree = (unsigned long) difftime(fin, debut);
+    clock_t fin = clock();
+    unsigned long duree_milli = (fin -  debut) * 1000 / CLOCKS_PER_SEC;
 
     ecrireOcc(*resultat);
     afficheMemoire(*memoire);
-    printf("Temps ecoule : %ld secondes\n", duree);  
-
+    printf("Temps ecoule : %ld millisecondes\n", duree_milli);  
+*/
 
     return 0;
 }
