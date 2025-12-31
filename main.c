@@ -428,6 +428,49 @@ int listeSimple(char *argv[], Liste * lst, InfoMem * memoire){
     return 1;
 }
 
+int listeTriee(char *argv[], Liste * lst, InfoMem * memoire){
+    // Fait tous les arguments pour trouver un fichier
+    for(int i = 1; argv[i]; i++){
+        FILE *fichier = fopen(argv[i], "r");
+        if(!fichier) continue; // Si ce n'est pas un fichier, on saute
+        int taille = 0;
+        char *mot = myMalloc(sizeof(char) * 30, memoire); // Plus grand mot français a moins de 30 lettres
+        int c = fgetc(fichier);
+        while(c != EOF){
+            if(!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == '-'))){ // Si c n'est pas une lettre classique
+                if(taille >= 30){
+                    taille = 0; // Ce n'est pas un mot on en prend pas compte
+                }
+                // fin de mot
+                if(taille != 0){
+                    mot[taille] = '\0';
+                    ajoutMotTriee(lst, mot, memoire);
+                    taille = 0;
+                }
+            // Ajout lettre au mot
+            }else{
+                if((c >= 'A' && c <= 'Z')){
+                    c = c - 'A' + 'a';
+                }
+                if(taille < 29)
+                    mot[taille] = c; // Ajout que si on est dans la zone de 30 allouée
+                taille++;
+            }
+
+            // printf("%c", c);
+            c = fgetc(fichier);
+        }
+        // gestion du dernier mot 
+        if(taille != 0){
+            mot[taille] = '\0';
+            ajoutMotTriee(lst, mot, memoire);
+        }
+        myFree(mot, memoire, sizeof(char) * 30);
+        fclose(fichier);
+    }
+    return 1;
+}
+
 
 
 int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire){
