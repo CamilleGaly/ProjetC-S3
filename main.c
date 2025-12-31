@@ -8,12 +8,12 @@
 typedef struct occMotChaine{
     char * mot;
     struct occMotChaine * suivant;
-    int occurence;
+    int occurrence;
 } OccMotChaine, * ListeChaine;
 
 typedef struct occMot{
     char * mot;
-    int occurence;
+    int occurrence;
 } OccMot;
 
 //Liste d'OccMot
@@ -34,20 +34,20 @@ typedef struct table_h{
 
 void afficheLstChaine(ListeChaine lst){
     for(; lst != NULL; lst = lst->suivant){
-        printf("%s : %d apparition(s)\n", lst->mot, lst->occurence);
+        printf("%s : %d apparition(s)\n", lst->mot, lst->occurrence);
     }
 }
 
 void afficheLst(Liste lst){
     for(int i = 0; i < lst.tailleLst; i++){
-        printf("%s : %d apparition(s)\n", lst.occmot[i].mot, lst.occmot[i].occurence);
+        printf("%s : %d apparition(s)\n", lst.occmot[i].mot, lst.occmot[i].occurrence);
     }
 }
 
 void afficheTableHach(Table_h table){
     for(int i = 0; i < table.capacite; i++){
         if(table.occmot[i] != NULL){
-            printf("%s : %d apparition(s)\n", table.occmot[i]->mot, table.occmot[i]->occurence);
+            printf("%s : %d apparition(s)\n", table.occmot[i]->mot, table.occmot[i]->occurrence);
         }
     }
 }
@@ -62,7 +62,7 @@ void afficheMemoire(InfoMem memoire){
 void ecrireOcc(Liste lst){
     FILE* fichier = fopen("resultatOcc.txt", "w");
     for(int i = 0; i < lst.tailleLst; i++){
-        fprintf(fichier, "%s %d \n", lst.occmot[i].mot, lst.occmot[i].occurence);
+        fprintf(fichier, "%s %d \n", lst.occmot[i].mot, lst.occmot[i].occurrence);
     }
     fclose(fichier);
 }
@@ -86,7 +86,7 @@ OccMotChaine * creerOccMotChaine(char * mot, int taille, InfoMem * memoire){
     ptrMot[taille] = '\0';
     ptr->mot = ptrMot;
     strcpy(ptr->mot, mot);
-    ptr->occurence = 1;
+    ptr->occurrence = 1;
     ptr->suivant = NULL;
 
     // ptr->mot = strdup(mot);  Fct donnée par Nathan pour allouer directement un pointeur en copiant (c'est tellement plus simple)
@@ -94,11 +94,11 @@ OccMotChaine * creerOccMotChaine(char * mot, int taille, InfoMem * memoire){
     return ptr;
 }
 
-//Ajoute un mot à la lst chainée ou augmente son nbr d'occurences si déjà présent
+//Ajoute un mot à la lst chainée ou augmente son nbr d'occurrences si déjà présent
 void ajoutMotChaine(ListeChaine * lst, char * mot, int taille, InfoMem * memoire){
     for(; (*lst) != NULL ; lst = &(*lst)->suivant){
         if(strcmp((*lst)->mot, mot)==0){
-            (*lst)->occurence ++;
+            (*lst)->occurrence ++;
             return;
         }
     }
@@ -136,11 +136,11 @@ void freeListe(Liste *lst, InfoMem * memoire){
     myFree(lst, memoire, sizeof(Liste));
 }
 
-//Ajoute un mot au tableau ou augmente son nbr d'occurences si déjà présent
+//Ajoute un mot au tableau ou augmente son nbr d'occurrences si déjà présent
 void ajoutMotLst(Liste * lst, char * mot, InfoMem * memoire){
     for(int i = 0; i< lst->tailleLst ; i++){
         if(strcmp((lst->occmot)[i].mot, mot)==0){
-            (lst->occmot)[i].occurence ++;
+            (lst->occmot)[i].occurrence ++;
             return;
         }
     }
@@ -151,7 +151,7 @@ void ajoutMotLst(Liste * lst, char * mot, InfoMem * memoire){
     }
     
     lst->occmot[lst->tailleLst].mot = myStrdup(mot, memoire);
-    lst->occmot[lst->tailleLst].occurence = 1;
+    lst->occmot[lst->tailleLst].occurrence = 1;
     lst->tailleLst ++;
 
     return;
@@ -164,26 +164,26 @@ void fusionLst(Liste * lst, Liste *a, Liste *b, InfoMem * memoire){
         myFree(lst->occmot[i].mot, memoire, strlen(lst->occmot[i].mot) + 1);
         if(pt_a == a->tailleLst){
             lst->occmot[i].mot = myStrdup(b->occmot[pt_b].mot, memoire);
-            lst->occmot[i].occurence = b->occmot[pt_b].occurence;
+            lst->occmot[i].occurrence = b->occmot[pt_b].occurrence;
             pt_b ++;
         }else if(pt_b == b->tailleLst){
             lst->occmot[i].mot = myStrdup(a->occmot[pt_a].mot, memoire);
-            lst->occmot[i].occurence = a->occmot[pt_a].occurence;
+            lst->occmot[i].occurrence = a->occmot[pt_a].occurrence;
             pt_a ++;
-        }else if(a->occmot[pt_a].occurence > b->occmot[pt_b].occurence){
+        }else if(a->occmot[pt_a].occurrence > b->occmot[pt_b].occurrence){
             lst->occmot[i].mot = myStrdup(a->occmot[pt_a].mot, memoire);
-            lst->occmot[i].occurence = a->occmot[pt_a].occurence;
+            lst->occmot[i].occurrence = a->occmot[pt_a].occurrence;
             pt_a ++;
         }else{
             lst->occmot[i].mot = myStrdup(b->occmot[pt_b].mot, memoire);
-            lst->occmot[i].occurence = b->occmot[pt_b].occurence;
+            lst->occmot[i].occurrence = b->occmot[pt_b].occurrence;
             pt_b ++;
         }
     }
 }
 
-//Tri une liste en fonction du nombre d'occurence de chaque mot (pour la visualisation finale)
-void triFusionOccurence(Liste * lst, InfoMem * memoire){
+//Tri une liste en fonction du nombre d'occurrence de chaque mot (pour la visualisation finale)
+void triFusionOccurrence(Liste * lst, InfoMem * memoire){
     if(lst->tailleLst == 0 || lst->tailleLst == 1){
         return;
     }
@@ -193,7 +193,7 @@ void triFusionOccurence(Liste * lst, InfoMem * memoire){
     Liste *a = initLst(taille_a, memoire);
     for (int i = 0; i < taille_a; i++) {
         a->occmot[i].mot = myStrdup(lst->occmot[i].mot, memoire);
-        a->occmot[i].occurence = lst->occmot[i].occurence;
+        a->occmot[i].occurrence = lst->occmot[i].occurrence;
     }
     a->tailleLst = taille_a;
 
@@ -201,12 +201,12 @@ void triFusionOccurence(Liste * lst, InfoMem * memoire){
     Liste * b = initLst(taille_b, memoire);
     for (int i = 0; i < taille_b; i++) {
         b->occmot[i].mot = myStrdup(lst->occmot[taille_a + i].mot, memoire);
-        b->occmot[i].occurence = lst->occmot[taille_a + i].occurence;
+        b->occmot[i].occurrence = lst->occmot[taille_a + i].occurrence;
     }
     b->tailleLst = b->tailleMax;
 
-    triFusionOccurence(a, memoire);
-    triFusionOccurence(b, memoire);
+    triFusionOccurrence(a, memoire);
+    triFusionOccurrence(b, memoire);
 
     fusionLst(lst,a,b, memoire); //Détruit a et b et remplit lst de façon triée
     freeListe(a, memoire);
@@ -258,7 +258,7 @@ OccMot * initOccMot(char * mot, InfoMem * memoire){
     if(!occMot->mot){
         myFree(occMot, memoire, sizeof(occMot));
     }
-    occMot->occurence = 1;
+    occMot->occurrence = 1;
     return occMot;
 }
 
@@ -313,7 +313,7 @@ void ajoutTableHach(Table_h * table, char * mot, InfoMem * memoire){
     //Il n'y a pas de suppression donc la recherche est simple
     for(; table->occmot[hach] != NULL; hach = (hach+1) % table->capacite){
         if( strcmp(table->occmot[hach]->mot, mot) == 0){
-            table->occmot[hach]->occurence += 1;
+            table->occmot[hach]->occurrence += 1;
             return;
         }
     }
@@ -330,7 +330,7 @@ Liste * tableHach_to_lst(Table_h * table, InfoMem * memoire){
     for(int j = 0; j < table->capacite; j++){
         if(table->occmot[j] != NULL){
             lst->occmot[i].mot = myStrdup(table->occmot[j]->mot, memoire);
-            lst->occmot[i].occurence = table->occmot[j]->occurence;
+            lst->occmot[i].occurrence = table->occmot[j]->occurrence;
             i++;
         }
     }
@@ -494,7 +494,7 @@ int main(int argc, char *argv[]){
     printf("\nListe 1 : \n");
     //afficheLst(*lst1);
 
-    triFusionOccurence(lst1, memoire);
+    triFusionOccurrence(lst1, memoire);
 
     time_t fin = time( NULL);
     unsigned long duree = (unsigned long) difftime(fin, debut);
@@ -533,7 +533,7 @@ int main(int argc, char *argv[]){
     fonctionHachage(argv, table, memoire);
 
     Liste * resultat = tableHach_to_lst(table, memoire);
-    triFusionOccurence(resultat, memoire);
+    triFusionOccurrence(resultat, memoire);
     time_t fin = time( NULL);
     unsigned long duree = (unsigned long) difftime(fin, debut);
 
