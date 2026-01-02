@@ -1,0 +1,6 @@
+dracula.txt -> 160 000 mots, 10 282 mots diff
+Pride_and_prejudice.txt -> environ 130 000 mots, 7 128 mots diff
+the_king_in_yellow.txt -> 72 000 mots, 8 151 mots diff (plus que Orgueil et prejuges donc plus de memoire et de tps !)
+chess_fundamentals.txt -> 50 000 mots, 2 199 mots diff 
+the_sonnets -> 18 00 mots, 3 247 mots diff (même temps que chess_fundamentals)
+the_flowers_of_evil -> 8 000 mots, 2 464 mots diff 

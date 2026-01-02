@@ -656,6 +656,7 @@ int main(int argc, char *argv[]){
         afficheLst(*resultat, n);
         afficheMemoire(*memoire);
         printf("Temps ecoule : %ld millisecondes\n", duree_milli);
+        printf("Nbr de mots diff : %d\n",resultat->tailleLst);
     }
 
     return 0;
