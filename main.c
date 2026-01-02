@@ -507,7 +507,9 @@ int listeTriee(char *argv[], Liste * lst, InfoMem * memoire, int k){
 int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire, int k){
     //Fais tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
-        FILE* fichier = fopen(argv[i], "r");
+        char texte[100] ="textes/";
+        strcat(texte, argv[i]);
+        FILE* fichier = fopen(texte, "r");
         if (!fichier) continue;//Si c'est pas un ficher on saute
 
         int taille = 0;
