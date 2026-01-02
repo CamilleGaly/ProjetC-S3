@@ -1,6 +1,12 @@
+Iliad -> 190 000 mots, 12 856 mots diff
 dracula.txt -> 160 000 mots, 10 282 mots diff
 Pride_and_prejudice.txt -> environ 130 000 mots, 7 128 mots diff
-the_king_in_yellow.txt -> 72 000 mots, 8 151 mots diff (plus que Orgueil et prejuges donc plus de memoire et de tps !)
-chess_fundamentals.txt -> 50 000 mots, 2 199 mots diff 
-the_sonnets -> 18 00 mots, 3 247 mots diff (même temps que chess_fundamentals)
+the_king_in_yellow.txt -> 72 000 mots, 8 151 mots diff (plus de mots diff que Orgueil et prejuges donc plus de memoire et de tps !)
+
+chess_fundamentals.txt -> 50 000 mots, 2 385 mots diff 
+cookery.txt -> 50 000 mots, 3 762 mots diff
+the_invisible_man.txt -> 50 000 mots, 5 808 mots diff
+moral_essay -> 50 000 mots, 7 248 mots diff
+
+the_sonnets -> 18 00 mots, 3 247 mots diff (même temps d'execution que chess_fundamentals)
 the_flowers_of_evil -> 8 000 mots, 2 464 mots diff 

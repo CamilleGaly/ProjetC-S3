@@ -1,6 +1,6 @@
 Total de l'utilisation de la memoire :
-Allocations : 2864876
-Desallocation : 2564852
-Pic : 539633
+Allocations : 812938
+Desallocation : 720970
+Pic : 169207
 
-Temps : 146 millisecondes
+Temps : 24 millisecondes
