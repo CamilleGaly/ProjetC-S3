@@ -8,5 +8,6 @@ cookery.txt -> 50 000 mots, 3 762 mots diff
 the_invisible_man.txt -> 50 000 mots, 5 808 mots diff
 moral_essay -> 50 000 mots, 7 248 mots diff
 
+
 the_sonnets -> 18 00 mots, 3 247 mots diff (même temps d'execution que chess_fundamentals)
 the_flowers_of_evil -> 8 000 mots, 2 464 mots diff 

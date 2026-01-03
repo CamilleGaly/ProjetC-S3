@@ -306,6 +306,17 @@ Table_h * initTableHach(int taille, InfoMem * memoire){
     return table;
 }
 
+void freeTableHash(Table_h * table, InfoMem * memoire){
+    for(int i = 0; i < table->capacite; i++){
+        if(table->occmot[i] != NULL){
+            myFree((table->occmot[i])->mot, memoire, strlen((table->occmot[i])->mot) + 1); // +1 pour le '\0'
+            myFree(table->occmot[i], memoire, sizeof(OccMot));
+        }
+    }
+    myFree(table->occmot, memoire, sizeof(OccMot *)*table->capacite);
+    myFree(table, memoire, sizeof(Table_h));
+}
+
 void doubleCapaHach(Table_h * table, InfoMem * memoire){
     int nouv_taille = table->capacite * 2;
     OccMot ** nouv_lst = myMalloc(nouv_taille * sizeof(OccMot*), memoire);//Nouvelle liste avec 2 fois plus de place pour les pointeurs
@@ -413,7 +424,10 @@ int listeSimple(char *argv[], Liste * lst, InfoMem * memoire, int k, int * nbr_m
 
     //Fais tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
-        FILE* fichier = fopen(argv[i], "r");
+        char texte[100] ="textes/";
+        strcat(texte, argv[i]);
+        FILE* fichier = fopen(texte, "r");
+
         if (!fichier) continue;//Si c'est pas un ficher on saute
 
         int taille = 0;
@@ -463,8 +477,13 @@ int listeSimple(char *argv[], Liste * lst, InfoMem * memoire, int k, int * nbr_m
 int listeTriee(char *argv[], Liste * lst, InfoMem * memoire, int k, int * nbr_mots){
     // Fait tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
-        FILE *fichier = fopen(argv[i], "r");
+
+        char texte[100] ="textes/";
+        strcat(texte, argv[i]);
+        FILE* fichier = fopen(texte, "r");
+        
         if(!fichier) continue; // Si ce n'est pas un fichier, on saute
+
         int taille = 0;
         char *mot = myMalloc(sizeof(char) * 30, memoire); // Plus grand mot français a moins de 30 lettres
         int c = fgetc(fichier);
@@ -657,6 +676,7 @@ int main(int argc, char *argv[]){
         fonctionHachage(argv, table, memoire, k, &nbr_mots);
 
         Liste * resultat = tableHach_to_lst(table, memoire);
+        //freeTableHash(table, memoire); //Libere la table maintenant qu'elle est convertie en liste
         triFusionOccurrence(resultat, memoire);
 
         clock_t fin = clock();

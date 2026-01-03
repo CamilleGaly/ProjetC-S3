@@ -94,6 +94,11 @@ L'algorithme utilise la fonction de hachage xxhash importée grâce à xxhash.c 
 1. Utilisation du temps :  
 La complexité d'un algorithme utilisant une table de hachage dépend du nombre de collision, ici la taille de la table est doublée lorsque le facteur de charge est supérieur ou égal a 75%.  
 La complexité des operations de recherche et d'ajout est alors un complexité amortie en moyenne en o(1).  
+Une fois la table de hachage finale obtenue celle-ci est convertie en liste afin de pouvoir utiliser l'algorithme de tri fusion pour avoir un résultat triée selon le nombre d'occurence des mots. La fonction "tableHach_to_lst" est en o(n) puisqu'elle parcourt chaque case de la table de hachage.  
+
+2. Utilisation de la mémoire :  
+La table de hachage prend potentiellement plus de place en mémoire que les Listes précédentes car sa taille double afin de rester au moins à 25% vide. De plus, une liste est aussi allouée afin de pouvoir trier le résultat obtenu. Cette liste est de la taille minimale nécessaire (c'est à dire le nombre de mots différents du texte).  
+Il y a donc plus de mémoire utilisée que lors des 2 algorithme précédents. 
 
 ## Comparaison des performances observées
 
