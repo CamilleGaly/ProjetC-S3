@@ -72,22 +72,24 @@ void ecrireOcc(char* argv[], Liste lst){
     }
 }
 
-void ecrirePerf(char* argv[], InfoMem memoire, unsigned long duree_milli){
+void ecrirePerf(char* argv[], InfoMem memoire, unsigned long duree_milli, int nbr_mots, int nbr_diff){
     FILE* fichier = NULL;
     for(int i = 0; argv[i]; i++){
         if(argv[i][0] == '-' && argv[i][1] == 'l'){
-            fichier = fopen(argv[i+1], "w");
+            char nom[100];
+            strcpy(nom, argv[i+1]);
+            strcat(nom, ".txt");
+            fichier = fopen(nom, "a");
         }
     }
     if(fichier == NULL)
         fichier = fopen("performances.txt", "w"); //fichier par défaut si aucun nom n'est spécifié
 
-    fprintf(fichier, "Total de l'utilisation de la memoire :\n");
+    fprintf(fichier, "\n%d %d\n", nbr_mots, nbr_diff);
     fprintf(fichier, "Allocations : %ld\n", (unsigned long)memoire.cumul_alloc);
     fprintf(fichier, "Desallocation : %ld\n", (unsigned long)memoire.cumul_desalloc);
     fprintf(fichier, "Pic : %ld\n",  (unsigned long)memoire.max_alloc);
-
-    fprintf(fichier, "\nTemps : %ld millisecondes\n", duree_milli);
+    fprintf(fichier, "Temps : %ld millisecondes\n", duree_milli);
     fclose(fichier);
 }
 
@@ -407,7 +409,7 @@ int fct0(char *argv[], ListeChaine * lst, InfoMem * memoire){
     return 1;
 }
 
-int listeSimple(char *argv[], Liste * lst, InfoMem * memoire, int k){
+int listeSimple(char *argv[], Liste * lst, InfoMem * memoire, int k, int * nbr_mots){
 
     //Fais tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
@@ -429,6 +431,7 @@ int listeSimple(char *argv[], Liste * lst, InfoMem * memoire, int k){
 
                 //fin de mot valide
                 if (taille != 0){
+                    (*nbr_mots)++;
                     mot[taille] = '\0';
                     ajoutMotLst(lst, mot, memoire);
                     taille = 0;   
@@ -448,6 +451,7 @@ int listeSimple(char *argv[], Liste * lst, InfoMem * memoire, int k){
         }
         //gestion du dernier mot
         if(taille != 0 && taille >= 30 && taille < k){
+            (*nbr_mots)++;
             mot[taille] = '\0';
             ajoutMotLst(lst, mot, memoire);
         }
@@ -456,7 +460,7 @@ int listeSimple(char *argv[], Liste * lst, InfoMem * memoire, int k){
     return 1;
 }
 
-int listeTriee(char *argv[], Liste * lst, InfoMem * memoire, int k){
+int listeTriee(char *argv[], Liste * lst, InfoMem * memoire, int k, int * nbr_mots){
     // Fait tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
         FILE *fichier = fopen(argv[i], "r");
@@ -474,6 +478,7 @@ int listeTriee(char *argv[], Liste * lst, InfoMem * memoire, int k){
 
                 //fin de mot valide
                 if(taille != 0){
+                    (*nbr_mots)++;
                     mot[taille] = '\0';
                     ajoutMotTriee(lst, mot, memoire);
                     taille = 0;
@@ -493,6 +498,7 @@ int listeTriee(char *argv[], Liste * lst, InfoMem * memoire, int k){
         }
         // gestion du dernier mot 
         if(taille != 0 && taille >= 30 && taille < k){
+            (*nbr_mots)++;
             mot[taille] = '\0';
             ajoutMotTriee(lst, mot, memoire);
         }
@@ -504,7 +510,7 @@ int listeTriee(char *argv[], Liste * lst, InfoMem * memoire, int k){
 
 
 
-int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire, int k){
+int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire, int k, int * nbr_mots){
     //Fais tous les arguments pour trouver un fichier
     for(int i = 1; argv[i]; i++){
         char texte[100] ="textes/";
@@ -526,6 +532,7 @@ int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire, int k){
 
                 //fin de mot valide
                 if (taille != 0){
+                    (*nbr_mots) ++;
                     mot[taille] = '\0';
                     ajoutTableHach(table, mot, memoire);
                     taille = 0;   
@@ -545,6 +552,7 @@ int fonctionHachage(char * argv[], Table_h * table, InfoMem * memoire, int k){
         }
         //gestion du dernier mot
         if(taille != 0 && taille >= 30 && taille < k){
+            (*nbr_mots)++;
             mot[taille] = '\0';
             ajoutTableHach(table, mot, memoire);
         }
@@ -574,6 +582,7 @@ int main(int argc, char *argv[]){
     int algo = 3; // 1 = simple, 2 = tri, 3 = hach (algorithme par défaut)
     int n = 0; //Nombre de mots à afficher, par défaut on affiche rien, vaut -1 pour tout afficher
     int k = 0; //Par defaut prend tous les mots en compte
+    int nbr_mots = 0; //Nombre de mots dans le texte
     for(int i = 0; argv[i]; i++){
         if(argv[i][0]=='-' && argv[i][1]=='a'){
             if(strcmp("simple", argv[i+1]) == 0)
@@ -606,14 +615,14 @@ int main(int argc, char *argv[]){
             printf("Erreur d'allocation");
             return 1;
         }
-        listeSimple(argv, lst, memoire, k);
+        listeSimple(argv, lst, memoire, k, &nbr_mots);
         triFusionOccurrence(lst, memoire);
 
         clock_t fin = clock();
         unsigned long duree_milli = (fin -  debut) * 1000 / CLOCKS_PER_SEC;
 
         ecrireOcc(argv,*lst);
-        ecrirePerf(argv, *memoire, duree_milli);
+        ecrirePerf(argv, *memoire, duree_milli, nbr_mots, lst->tailleLst);
         afficheLst(*lst,n);
         afficheMemoire(*memoire);
         printf("Temps ecoule : %ld millisecondes\n", duree_milli); 
@@ -626,13 +635,13 @@ int main(int argc, char *argv[]){
             printf("Erreur d'allocation");
             return 1;
         }
-        listeTriee(argv, lst, memoire, k);
+        listeTriee(argv, lst, memoire, k, &nbr_mots);
         triFusionOccurrence(lst, memoire);
 
         clock_t fin = clock();
         unsigned long duree_milli = (fin -  debut) * 1000 / CLOCKS_PER_SEC;
         ecrireOcc(argv,*lst);
-        ecrirePerf(argv, *memoire, duree_milli);
+        ecrirePerf(argv, *memoire, duree_milli, nbr_mots, lst->tailleLst);
         afficheLst(*lst,n);
         afficheMemoire(*memoire);
         printf("Temps ecoule : %ld millisecondes\n", duree_milli);  
@@ -645,7 +654,7 @@ int main(int argc, char *argv[]){
             printf("Erreur d'allocation");
             return 1;
         }
-        fonctionHachage(argv, table, memoire, k);
+        fonctionHachage(argv, table, memoire, k, &nbr_mots);
 
         Liste * resultat = tableHach_to_lst(table, memoire);
         triFusionOccurrence(resultat, memoire);
@@ -654,7 +663,7 @@ int main(int argc, char *argv[]){
         unsigned long duree_milli = (fin -  debut) * 1000 / CLOCKS_PER_SEC;
 
         ecrireOcc(argv,*resultat);
-        ecrirePerf(argv, *memoire, duree_milli);
+        ecrirePerf(argv, *memoire, duree_milli, nbr_mots, resultat->tailleLst);
         afficheLst(*resultat, n);
         afficheMemoire(*memoire);
         printf("Temps ecoule : %ld millisecondes\n", duree_milli);
