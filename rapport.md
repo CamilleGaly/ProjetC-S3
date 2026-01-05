@@ -14,13 +14,15 @@ Rendu du 06/01/2026
 * Un fichier gererMem.c contenant la structure pour étudier la mémoire et les fonctions d'allocation ou de désallocation y faisant appel.
 * Des fichiers xxhash.c et xxhsh.h permettant l'utilisation d'une fonction de hachage.
 * Un fichier graphiqueMotsCourants.py permettant comme son nom l'indique de générer un graphique des mots les plus courants à partir d'un fichier texte de résultats généré par le programme de main.c.
+* Un fichier graphiquePerfs permettant de générer des graphiques des performances des algorithmes.
 * Un fichier readMe.txt détaillant le lancement du programme.
 * Un dossier textes avec les fichiers textes utilisés par les algorithmes.
+* Un dossier performances avec les fichiers de performance générés par le programme, ces fichiers sont utilisés afin de générer des graphiques de performance.
 
 ## Algorithmes utilisés
 
 ### Structure générale 
-Une structure générale à été adoptée dans chaque algorithme afin de réprésenter un mot et son nombre d'occurences.
+Une structure générale à été adoptée dans chaque algorithme afin de représenter un mot et son nombre d'occurences.
 
 ```
 typedef struct occMot{
@@ -102,8 +104,18 @@ Il y a donc plus de mémoire utilisée que lors des 2 algorithme précédents.
 
 ## Comparaison des performances observées
 
-Utilisation mémoire : hachage > liste (triée = simple)  
-Temps : hachage < liste triée < liste simple
+1. Utilisation mémoire pour des textes similaires:  
+L'utilisation de mémoire est similaire pour les listes simples ou triées.  
+     - Espace mémoire alloué au total :  
+hachage > liste  
+     - Pic d'espace mémoire alloué :  
+hachage > liste  
+     - Espace mémoire toujours alloué à la fin de l'algorithme :   
+     liste > hachage  
+     En effet, la table de hachage est libérée de la mémoire et l'on ne conserve qu'une liste de taille minimale (nombre de mots différents dans le texte).  
+
+2. Utilisation du temps :  
+hachage < liste triée < liste simple  
 
 Graphiques : 
 Temps de chaques sur textes identiques
@@ -122,12 +134,12 @@ idée -> algo image -> code
 [Jsp ce qu'on doit écrire ici en vrai...]
 
 ## Organisation du groupe
-Contributions en % :
-* Amaury :
-* Camille :
+Contributions en pourcentage des membres du groupe :
+* Amaury : 50 %
+* Camille : 50 %
 
 Algorithmes implémentés :
-* Amaury : listes triées
+* Amaury : liste triée
 * Camille : liste classique et table de hachage  
 
 

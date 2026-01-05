@@ -5,11 +5,6 @@
 #include "gererMem.c"
 #include "xxhash.c" //hash = XXH3_64bits(donnée, taille_donnée);
 
-typedef struct occMotChaine{
-    char * mot;
-    struct occMotChaine * suivant;
-    int occurrence;
-} OccMotChaine, * ListeChaine;
 
 typedef struct occMot{
     char * mot;
@@ -31,12 +26,6 @@ typedef struct table_h{
 } Table_h;
 
 /////////Fonctions d'affichage ////////////
-
-void afficheLstChaine(ListeChaine lst){
-    for(; lst != NULL; lst = lst->suivant){
-        printf("%s : %d apparition(s)\n", lst->mot, lst->occurrence);
-    }
-}
 
 void afficheLst(Liste lst, int n){
     //n correspond au nombre de mots a afficher, si n = -1 on affcihe tout
@@ -92,48 +81,6 @@ void ecrirePerf(char* argv[], InfoMem memoire, unsigned long duree_milli, int nb
     fprintf(fichier, "Temps : %ld millisecondes\n", duree_milli);
     fclose(fichier);
 }
-
-//////////////////// Liste Chainées ////////////////////
-
-//J'avais commencé par des lst chaînées jsp pk mais ça peut-être utile pour la version hash je pense
-//taille correspond à la taille du mot
-OccMotChaine * creerOccMotChaine(char * mot, int taille, InfoMem * memoire){
-    OccMotChaine * ptr = myMalloc(sizeof(OccMotChaine), memoire);
-    if(!ptr){
-        return NULL; //erreur
-    }
-
-    char * ptrMot = myMalloc(taille+1, memoire);
-    if(!ptrMot){
-        myFree(ptrMot, memoire, taille+1);
-        myFree(ptr, memoire, sizeof(OccMotChaine));
-        return NULL;
-    }
-    ptrMot[taille] = '\0';
-    ptr->mot = ptrMot;
-    strcpy(ptr->mot, mot);
-    ptr->occurrence = 1;
-    ptr->suivant = NULL;
-
-    // ptr->mot = strdup(mot);  Fct donnée par Nathan pour allouer directement un pointeur en copiant (c'est tellement plus simple)
-
-    return ptr;
-}
-
-//Ajoute un mot à la lst chainée ou augmente son nbr d'occurrences si déjà présent
-void ajoutMotChaine(ListeChaine * lst, char * mot, int taille, InfoMem * memoire){
-    for(; (*lst) != NULL ; lst = &(*lst)->suivant){
-        if(strcmp((*lst)->mot, mot)==0){
-            (*lst)->occurrence ++;
-            return;
-        }
-    }
-
-    OccMotChaine * new = creerOccMotChaine(mot, taille, memoire);
-    *lst = new;
-    return;
-}
-
 
 
 //////////////////// Liste classiques ////////////////////
@@ -381,45 +328,6 @@ Liste * tableHach_to_lst(Table_h * table, InfoMem * memoire){
 //////////////////// Fonctions principales ////////////////////
 
 
-//Version test avec la structure chaînée
-int fct0(char *argv[], ListeChaine * lst, InfoMem * memoire){
-
-    //Fais tous les arguments pour trouver un fichier
-    for(int i = 1; argv[i]; i++){
-        FILE* fichier = fopen(argv[i], "r");
-        if (!fichier) continue;//Si c'est pas un ficher on saute
-
-        int taille = 0;
-        char * mot = myMalloc(50, memoire); //Bourrin faudra essayer de faire bien avec des realloc (ou pas)
-        int c = fgetc(fichier);
-        while(c != EOF){
-            if ((c == '\n' || c=='\t' || c ==' ')){
-                //fin de mot
-                if (taille != 0){
-                    //printf("Ajout mot");
-                    mot[taille] = '\0';
-                    ajoutMotChaine(lst, mot, taille, memoire);
-                    taille = 0;   
-                }
-            //Ajout lettre au mot
-            }else{
-                mot[taille] = c;
-                taille++;
-            }
-
-            printf("%c", c);
-            c = fgetc(fichier);
-        }
-        //gestion du dernier mot
-        if (taille != 0){
-            mot[taille] = '\0';
-            ajoutMotChaine(lst, mot, taille, memoire);
-        }
-        fclose(fichier);
-    }
-    return 1;
-}
-
 int listeSimple(char *argv[], Liste * lst, InfoMem * memoire, int k, int * nbr_mots){
 
     //Fais tous les arguments pour trouver un fichier
@@ -643,8 +551,6 @@ int main(int argc, char *argv[]){
         ecrireOcc(argv,*lst);
         ecrirePerf(argv, *memoire, duree_milli, nbr_mots, lst->tailleLst);
         afficheLst(*lst,n);
-        afficheMemoire(*memoire);
-        printf("Temps ecoule : %ld millisecondes\n", duree_milli); 
     }
 
     //Version liste triée par ordre alphabétique
@@ -662,8 +568,6 @@ int main(int argc, char *argv[]){
         ecrireOcc(argv,*lst);
         ecrirePerf(argv, *memoire, duree_milli, nbr_mots, lst->tailleLst);
         afficheLst(*lst,n);
-        afficheMemoire(*memoire);
-        printf("Temps ecoule : %ld millisecondes\n", duree_milli);  
     }
 
     //Version table de hachage
@@ -685,9 +589,6 @@ int main(int argc, char *argv[]){
         ecrireOcc(argv,*resultat);
         ecrirePerf(argv, *memoire, duree_milli, nbr_mots, resultat->tailleLst);
         afficheLst(*resultat, n);
-        afficheMemoire(*memoire);
-        printf("Temps ecoule : %ld millisecondes\n", duree_milli);
-        printf("Nbr de mots diff : %d\n",resultat->tailleLst);
     }
 
     return 0;
