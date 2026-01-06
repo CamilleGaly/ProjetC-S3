@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import os
 
 def lireMots(fichier):
     """
@@ -30,7 +29,7 @@ def affichePremiersMots(nombreMots, donnees):
     plt.barh(liste_mots, liste_occurrences)
     plt.ylabel("Mot")
     plt.xlabel("Nombre d'occurrences")
-    plt.title(f"Les{nombreMots} mots les plus fréquents")
+    plt.title(f"Les {nombreMots} mots les plus fréquents")
     plt.gca().invert_yaxis()
     plt.show()    
 
