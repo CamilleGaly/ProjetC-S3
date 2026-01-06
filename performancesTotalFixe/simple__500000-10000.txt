@@ -1,0 +1,30 @@
+
+499999 10000
+Allocations : 2581314
+Desallocation : 2459352
+Pic : 362346
+Temps : 8183 millisecondes
+
+499999 10000
+Allocations : 2581314
+Desallocation : 2459352
+Pic : 362346
+Temps : 7699 millisecondes
+
+499999 10000
+Allocations : 2581314
+Desallocation : 2459352
+Pic : 362346
+Temps : 8132 millisecondes
+
+499999 10000
+Allocations : 2581314
+Desallocation : 2459352
+Pic : 362346
+Temps : 8292 millisecondes
+
+499999 10000
+Allocations : 2581314
+Desallocation : 2459352
+Pic : 362346
+Temps : 8200 millisecondes

@@ -1,0 +1,150 @@
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 213 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 192 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 197 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 214 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 207 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 229 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 288 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 268 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 183 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 217 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 198 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 203 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 266 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 324 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 208 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 196 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 242 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 220 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 231 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 205 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 287 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 250 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 272 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 239 millisecondes
+
+473839 32768
+Allocations : 10414758
+Desallocation : 9352128
+Pic : 1879961
+Temps : 246 millisecondes

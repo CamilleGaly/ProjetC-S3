@@ -1,0 +1,150 @@
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 121 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 129 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 95 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 172 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 90 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 129 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 104 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 119 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 116 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 113 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 85 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 150 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 122 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 90 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 141 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 101 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 118 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 91 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 98 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 105 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 146 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 209 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 122 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 111 millisecondes
+
+499999 2000
+Allocations : 477862
+Desallocation : 414448
+Pic : 111678
+Temps : 100 millisecondes

@@ -1,0 +1,150 @@
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 20 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 12 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 11 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 19 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 17 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 12 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 20 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 9 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 25 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 15 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 15 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 17 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 17 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 19 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 20 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 16 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 18 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 21 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 28 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 16 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 11 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 8 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 20 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 19 millisecondes
+
+9999 5000
+Allocations : 1290278
+Desallocation : 1139504
+Pic : 271134
+Temps : 8 millisecondes

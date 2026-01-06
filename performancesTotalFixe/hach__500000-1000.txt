@@ -1,0 +1,150 @@
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 105 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 96 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 112 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 119 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 125 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 79 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 115 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 100 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 88 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 121 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 125 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 74 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 138 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 115 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 84 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 98 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 105 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 122 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 99 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 130 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 125 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 137 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 117 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 78 millisecondes
+
+499999 1000
+Allocations : 222886
+Desallocation : 191152
+Pic : 55974
+Temps : 74 millisecondes

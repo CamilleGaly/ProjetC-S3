@@ -1,0 +1,30 @@
+
+499999 5000
+Allocations : 1210466
+Desallocation : 1149464
+Pic : 181362
+Temps : 5480 millisecondes
+
+499999 5000
+Allocations : 1210466
+Desallocation : 1149464
+Pic : 181362
+Temps : 5049 millisecondes
+
+499999 5000
+Allocations : 1210466
+Desallocation : 1149464
+Pic : 181362
+Temps : 4908 millisecondes
+
+499999 5000
+Allocations : 1210466
+Desallocation : 1149464
+Pic : 181362
+Temps : 5468 millisecondes
+
+499999 5000
+Allocations : 1210466
+Desallocation : 1149464
+Pic : 181362
+Temps : 4983 millisecondes

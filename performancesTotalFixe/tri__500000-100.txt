@@ -1,0 +1,150 @@
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 71 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 84 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 71 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 62 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 75 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 89 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 91 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 79 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 72 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 83 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 91 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 83 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 80 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 112 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 71 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 72 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 80 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 97 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 106 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 75 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 125 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 88 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 84 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 69 millisecondes
+
+499999 100
+Allocations : 16050
+Desallocation : 14358
+Pic : 4272
+Temps : 109 millisecondes

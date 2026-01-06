@@ -1,0 +1,30 @@
+
+473839 32768
+Allocations : 9907754
+Desallocation : 9433768
+Pic : 1291393
+Temps : 29589 millisecondes
+
+473839 32768
+Allocations : 9907754
+Desallocation : 9433768
+Pic : 1291393
+Temps : 29165 millisecondes
+
+473839 32768
+Allocations : 9907754
+Desallocation : 9433768
+Pic : 1291393
+Temps : 28717 millisecondes
+
+473839 32768
+Allocations : 9907754
+Desallocation : 9433768
+Pic : 1291393
+Temps : 28820 millisecondes
+
+473839 32768
+Allocations : 9907754
+Desallocation : 9433768
+Pic : 1291393
+Temps : 30277 millisecondes

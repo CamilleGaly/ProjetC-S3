@@ -1,0 +1,150 @@
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 272 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 298 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 303 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 303 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 251 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 433 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 377 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 322 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 325 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 262 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 343 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 425 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 360 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 298 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 272 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 359 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 231 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 310 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 298 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 343 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 363 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 330 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 319 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 266 millisecondes
+
+499999 200
+Allocations : 35042
+Desallocation : 31640
+Pic : 8406
+Temps : 355 millisecondes

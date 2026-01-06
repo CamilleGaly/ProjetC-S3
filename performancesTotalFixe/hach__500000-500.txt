@@ -1,0 +1,150 @@
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 125 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 127 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 100 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 114 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 108 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 86 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 87 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 118 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 88 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 81 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 80 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 113 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 82 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 85 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 87 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 107 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 89 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 127 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 102 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 91 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 89 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 123 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 94 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 129 millisecondes
+
+499999 500
+Allocations : 103398
+Desallocation : 87504
+Pic : 28110
+Temps : 126 millisecondes
