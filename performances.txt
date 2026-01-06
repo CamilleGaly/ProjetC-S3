@@ -1,6 +1,0 @@
-
-5763 1695
-Allocations : 739020
-Desallocation : 654570
-Pic : 154068
-Temps : 48 millisecondes

@@ -6,13 +6,15 @@ Amaury Coquelin, Camille Galy Sagrasta
 TD Double Licence
 -------------------------------------------------
 Fichiers présents:
+* Un fichier readMe.txt détaillant le lancement du programme.
 * Un fichier main.c contenant le coeur du programme.
 * Un fichier gererMem.c contenant la structure pour étudier la mémoire et les fonctions d'allocation ou de désallocation y faisant appel.
 * Des fichiers xxhash.c et xxhsh.h permettant l'utilisation d'une fonction de hachage.
-* Des fichiers graphiqueMotsCourants.py et graphiquePerfs permettant de générer des graphiques à partir des résultats des algorithmes.
-* Un fichier readMe.txt détaillant le lancement du programme.
 * Un dossier textes avec les fichiers textes utilisés par les algorithmes.
-* Un dossier performances avec les fichiers de performance générés par le programme, ces fichiers sont utilisés afin de générer des graphiques de performance.
+* Un dossier performancesDiffFixe avec des fichiers de performance générés par le programme dont le nombre de mots différents est identique pour chaque texte. Ces fichiers sont utilisés afin de générer des graphiques de performance.
+* Un dossier performancesTotalFixe. Idem, cependant cette fois c'est le nombre de mots totaux qui est identique pour chaque texte.
+* Un fichier graphiqueMotsCourants.py permettant comme son nom l'indique de générer un graphique des mots les plus courants à partir d'un fichier texte de résultats généré par le programme de main.c.
+* Un fichier graphiquesAlgos permettant de générer des graphiques des performances des algorithmes. Attention, les fichiers utilisés doivent être dans le dossier performancesDiffFixe ou performancesTotalFixe.
 -------------------------------------------------
 Lancement : 
 1. Dézipper l'archive .zip téléchargée

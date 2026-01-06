@@ -10,14 +10,17 @@ Rendu du 06/01/2026
 <div style="page-break-after: always;"></div>
 
 ## Contenu du fichier
+* Un fichier readMe.txt détaillant le lancement du programme.
 * Un fichier main.c contenant le coeur du programme.
 * Un fichier gererMem.c contenant la structure pour étudier la mémoire et les fonctions d'allocation ou de désallocation y faisant appel.
 * Des fichiers xxhash.c et xxhsh.h permettant l'utilisation d'une fonction de hachage.
-* Un fichier graphiqueMotsCourants.py permettant comme son nom l'indique de générer un graphique des mots les plus courants à partir d'un fichier texte de résultats généré par le programme de main.c.
-* Un fichier graphiquePerfs permettant de générer des graphiques des performances des algorithmes.
-* Un fichier readMe.txt détaillant le lancement du programme.
 * Un dossier textes avec les fichiers textes utilisés par les algorithmes.
-* Un dossier performances avec les fichiers de performance générés par le programme, ces fichiers sont utilisés afin de générer des graphiques de performance.
+* Un dossier performancesDiffFixe avec des fichiers de performance générés par le programme dont le nombre de mots différents est identique pour chaque texte. Ces fichiers sont utilisés afin de générer des graphiques de performance.
+* Un dossier performancesTotalFixe. Idem, cependant cette fois c'est le nombre de mots totaux qui est identique pour chaque texte.
+* Un fichier graphiqueMotsCourants.py permettant comme son nom l'indique de générer un graphique des mots les plus courants à partir d'un fichier texte de résultats généré par le programme de main.c.
+* Un fichier graphiquesAlgos permettant de générer des graphiques des performances des algorithmes. Attention, les fichiers utilisés doivent être dans le dossier performancesDiffFixe ou performancesTotalFixe.
+
+<div style="page-break-after: always;"></div>
 
 ## Algorithmes utilisés
 
@@ -106,34 +109,35 @@ Il y a donc plus de mémoire utilisée que lors des 2 algorithme précédents.
 
 1. Utilisation mémoire pour des textes similaires:  
 L'utilisation de mémoire est similaire pour les listes simples ou triées.  
+Cette utilisation mémoire dépend du nombre de mots différents mais pas du nombre de mots totaux du texte.
      - Espace mémoire alloué au total :  
 hachage > liste  
      - Pic d'espace mémoire alloué :  
 hachage > liste  
+![Pic mémoire mots différents](tempo/PicMem_MotsDiff.png "Pic mémoire par algorithme selon le nombre de mots différents")  
+Les trois algorithmes aboutissent à un pic d'utilisation mémoire linéaire. Cependant, la table de hachage utilise bien plus de mémoire.
      - Espace mémoire toujours alloué à la fin de l'algorithme :   
      liste > hachage  
      En effet, la table de hachage est libérée de la mémoire et l'on ne conserve qu'une liste de taille minimale (nombre de mots différents dans le texte).  
 
 2. Utilisation du temps :  
 hachage < liste triée < liste simple  
+Le temps dépend du nombre de mots totaux ainsi que du nombre de mots différents.  
+![Durée selon le nombre total de mots](tempo/Temps_nbrMots.png "Durée d'execusion par algorithme selon le nombre de mots totaux du texte")  
+![Durée selon le nombre de mots différents](tempo/Temps_nbrDiff.png "Durée d'execusion par algorithme selon le nombre de mots différents du texte")  
 
-Graphiques : 
-Temps de chaques sur textes identiques
-Memoire sur txt id
-
-pour chaque algo :  
-Evolution du tps/memoire en fonction du nbr de mots totaux  
-Evolution du temps/memoire en fonction du nbr de mots diff
+<div style="page-break-after: always;"></div>
 
 ## Organisation du travail
 
 ### Conception des algorithmes
-[ Votre organisation en termes de recherche et de conception d’algorithmes.]  
-idée -> algo image -> code
+Nous avons tout d'abord réfléchi ensemble aux algorithmes semblant les plus intéressants et efficaces.  
+Après avoir validée l'idée générale l'un des 2 à pris en charge l'algorithme, après des étapes intermédiaires d'écriture de pseudo-code ou de schématisation dessinées nous sommes passés au codage des fonctions.  
 
-[Jsp ce qu'on doit écrire ici en vrai...]
 
 ## Organisation du groupe
+Beaucoup d'échange à eu lieu via messages durant les vancances de Noël ainsi que des échanges de codes à l'aide de Github.  
+
 Contributions en pourcentage des membres du groupe :
 * Amaury : 50 %
 * Camille : 50 %

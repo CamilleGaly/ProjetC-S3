@@ -1,5 +1,0 @@
-20000 1000
-Allocations : 322884
-Desallocation : 282038
-Pic : 74314
-Temps : 10 millisecondes
